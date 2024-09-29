@@ -8,9 +8,15 @@ export class User{
     @Column('text', {unique:true})
     email: string;
 
-    @Column('text')
+    @Column('text', {select:false})
     password:string;
 
     @Column('text')
     name:string;
+
+    @Column('text', {array:true, default:['user']})
+    roles: string[];
+
+    @Column('boolean',{default:false})
+    isActive: boolean;
 }

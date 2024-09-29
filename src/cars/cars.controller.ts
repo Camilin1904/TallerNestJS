@@ -7,26 +7,26 @@ import { UpdateCarDto } from './dto/update-car.dto';
 @Controller('cars')
 export class CarsController {
 
-    public carsService:CarsService = new CarsService();
+    constructor(public readonly carsService:CarsService){}
 
     @Get()
-    findAll():string{
+    async findAll(){
         return this.carsService.findAll();
     }
 
     @Post()
     @UsePipes(ValidationPipe)
-    crate(@Body() car:CreateCarDto):Car{
+    async crate(@Body() car:CreateCarDto){
         return this.carsService.create(car);
     }
 
     @Get(':id')
-    findById(@Param('id', ParseUUIDPipe)id :string):Car{
+    async findById(@Param('id', ParseUUIDPipe)id :string){
         return this.carsService.findById(id);
     }
 
     @Delete(':id')
-    delete(@Param('id', ParseUUIDPipe)id :string):Car{
+    async delete(@Param('id', ParseUUIDPipe)id :string){
         return this.carsService.delete(id);
     }
 
